@@ -1,0 +1,458 @@
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #0a0a0a;
+    --text-muted: #333333;
+    --selection-bg: #000000;
+    --selection-color: #ffffff;
+    --theme-btn-bg: rgba(0, 0, 0, 0.06);
+    --theme-btn-border: rgba(0, 0, 0, 0.12);
+    --theme-btn-color: #0a0a0a;
+}
+
+body.dark-mode {
+    --bg-color: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-muted: #bbbbbb;
+    --selection-bg: #ffffff;
+    --selection-color: #000000;
+    --theme-btn-bg: rgba(255, 255, 255, 0.12);
+    --theme-btn-border: rgba(255, 255, 255, 0.2);
+    --theme-btn-color: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    --video-shift-x: 0px;
+    --video-shift-y: 0px;
+}
+
+.topbar {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: transparent;
+}
+
+.top-left {
+    display: flex;
+    align-items: center;
+    padding-left: 22px;
+}
+
+.logo {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.logo:active {
+    transform: scale(0.9);
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.top-right {
+    display: flex;
+    gap: 24px;
+    margin-left: auto;
+    padding-right: 25px;
+    align-items: center;
+}
+
+.TRT {
+    font-size: 18px;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.TRT:hover {
+    opacity: 0.7;
+}
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--theme-btn-border);
+    background-color: var(--theme-btn-bg);
+    color: var(--theme-btn-color);
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.04);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.96);
+}
+
+.Options {
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--text-primary);
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    height: 950px;
+    max-height: 100vh;
+    font-size: 300px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.Title {
+    font-size: clamp(100px, 28vw, 620px);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.Description {
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: var(--text-primary);
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.Description:hover {
+    transform: scale(1.08);
+}
+
+.Description:active {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-color);
+}
+
+::-moz-selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-color);
+}
+
+.Title::selection,
+.logo::selection,
+.Video::selection {
+    background-color: transparent;
+    color: inherit;
+}
+
+.Description::selection {
+    background-color: rgb(89, 106, 255);
+    color: white;
+    border-radius: 10px;
+}
+
+.video-stage {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    height: 120vh;
+    min-height: 600px;
+    margin: 0 0 60px 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    background: #000;
+}
+
+.Video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-backdrop {
+    filter: blur(14px) brightness(0.7) saturate(1.1);
+    transform: scale(1.8);
+}
+
+.video-window {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(50vw, 940px);
+    height: min(36vw, 640px);
+    min-width: 320px;
+    min-height: 220px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border-radius: 32px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #000;
+}
+
+.video-foreground {
+    width: 210%;
+    height: 210%;
+    transform: scale(1.1) translate3d(0, 0, 0);
+    transition: transform 0.12s linear;
+}
+
+.About {
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.AboutTitle {
+    font-size: clamp(52px, 12vw, 150px);
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+}
+
+.AboutTitle::selection {
+    background-color: rgb(89, 106, 255);
+    color: white;
+}
+
+.AboutDescription {
+    font-size: clamp(32px, 7.5vw, 120px);
+    line-height: 1.1;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-left: 0;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.AboutDescription::selection {
+    background-color: rgb(28, 253, 95);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.AboutSpan {
+    display: inline;
+    background-color: rgb(28, 253, 95);
+    color: #05260f;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+.AboutSpan::selection {
+    background-color: transparent;
+    color: inherit;
+}
+
+.socials-section {
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.WorkTitle {
+    font-size: clamp(52px, 12vw, 150px);
+    line-height: 1;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+}
+
+.WorkDn {
+    font-size: clamp(34px, 7.5vw, 100px);
+    line-height: 1.1;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+}
+
+.WorkDb {
+    font-size: clamp(34px, 7.5vw, 100px);
+    line-height: 1.1;
+    margin-top: 5px;
+    margin-bottom: 60px;
+    padding-left: 0;
+    color: rgb(255, 89, 144);
+}
+
+.flash-highlight {
+    animation: flashSection 0.2s ease;
+}
+
+@keyframes flashSection {
+    0% {
+        background-color: transparent;
+        box-shadow: 0 0 0 rgba(89, 106, 255, 0);
+    }
+    20% {
+        background-color: rgba(89, 106, 255, 0.18);
+        box-shadow: 0 0 0 8px rgba(89, 106, 255, 0.12);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: 0 0 0 rgba(89, 106, 255, 0);
+    }
+}
+
+footer {
+    background-color: rgb(15, 15, 15);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    margin: 0;
+    padding: 10px 0;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+.Footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    min-width: 120px;
+}
+
+.discord-link {
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.FooterText {
+    margin: 0 auto;
+    text-align: center;
+    flex: 1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.discord {
+    color: white;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.SocialIcon {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.SocialIcon:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+.SocialIcon:active {
+    transform: scale(0.9);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .topbar {
+        padding: 8px 0;
+    }
+    .top-left {
+        padding-left: 14px;
+    }
+    .top-right {
+        gap: 12px;
+        padding-right: 14px;
+    }
+    .TRT {
+        font-size: 14px;
+    }
+    .theme-toggle-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    .Content {
+        height: 70vh;
+        min-height: 480px;
+    }
+    .video-stage {
+        height: 75vh;
+        min-height: 420px;
+        margin-bottom: 40px;
+    }
+    .video-window {
+        width: 88vw;
+        height: 52vw;
+        min-width: 280px;
+        min-height: 180px;
+        border-radius: 20px;
+    }
+    .Footer {
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+    .social-link {
+        min-width: auto;
+    }
+    .discord-link {
+        margin-left: 0;
+        justify-content: center;
+    }
+    .discord {
+        text-align: center;
+    }
+}

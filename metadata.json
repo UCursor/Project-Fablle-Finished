@@ -1,0 +1,6 @@
+{
+  "name": "Fable Web Design & Development",
+  "description": "Project Fable creates modern websites through web design, development, and digital experiences.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,597 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------
+   Light & Dark Theme Variables
+   ---------------------------------------------------- */
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #0a0a0a;
+    --text-description: #111111;
+    --about-description-color: #111111;
+    --selection-bg: #000000;
+    --selection-color: #ffffff;
+    --theme-btn-bg: rgba(0, 0, 0, 0.06);
+    --theme-btn-border: rgba(0, 0, 0, 0.15);
+    --theme-btn-color: #0a0a0a;
+    --topbar-bg: rgba(255, 255, 255, 0.85);
+}
+
+body.dark-mode,
+.dark-mode {
+    --bg-color: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-description: #ffffff;
+    --about-description-color: #f3f3f3;
+    --selection-bg: #ffffff;
+    --selection-color: #000000;
+    --theme-btn-bg: rgba(255, 255, 255, 0.12);
+    --theme-btn-border: rgba(255, 255, 255, 0.25);
+    --theme-btn-color: #ffffff;
+    --topbar-bg: rgba(10, 10, 10, 0.85);
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    --video-shift-x: 0px;
+    --video-shift-y: 0px;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+/* ----------------------------------------------------
+   Topbar Navigation
+   ---------------------------------------------------- */
+.topbar {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: var(--topbar-bg);
+    transition: background 0.25s ease;
+    isolation: isolate;
+}
+
+.top-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.logo:active {
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.top-right {
+    display: flex;
+    gap: 24px;
+    margin-left: auto;
+    align-items: center;
+}
+
+.TRT {
+    font-size: 18px;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease, color 0.25s ease;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.TRT:hover {
+    opacity: 0.7;
+}
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--theme-btn-border);
+    background-color: var(--theme-btn-bg);
+    color: var(--theme-btn-color);
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+/* ----------------------------------------------------
+   Hero Content & Liquid Mask Invert Effect
+   ---------------------------------------------------- */
+.hero-liquid-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.liquid-container {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
+}
+
+.Title {
+    font-size: clamp(60px, 20vw, 620px);
+    line-height: 0.88;
+    margin: 0;
+    text-align: center;
+    color: var(--text-primary);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    transition: color 0.25s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Selection for fable text does not do anything */
+.Title::selection,
+.Title::-moz-selection {
+    background: transparent !important;
+    color: inherit !important;
+    text-shadow: none !important;
+}
+
+.Description {
+    font-size: clamp(16px, 2.4vw, 22px);
+    color: var(--text-description);
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease, color 0.25s ease;
+    text-align: center;
+    font-weight: 500;
+}
+
+.Description:hover {
+    transform: scale(1.08);
+}
+
+.Description:active {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.Description::selection {
+    background-color: rgb(89, 106, 255);
+    color: white;
+    border-radius: 10px;
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-color);
+}
+
+::-moz-selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-color);
+}
+
+.logo::selection,
+.Video::selection {
+    background-color: transparent;
+    color: inherit;
+}
+
+/* ----------------------------------------------------
+   Video Stage with Interactive Distortion
+   ---------------------------------------------------- */
+.video-stage {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    min-height: 540px;
+    margin: 0 0 60px 0;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+}
+
+.Video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-backdrop {
+    transform: scale(1.1);
+    opacity: 0.35;
+}
+
+.video-window {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(50vw, 940px);
+    height: min(36vw, 640px);
+    min-width: 320px;
+    min-height: 220px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border-radius: 32px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #000;
+}
+
+.video-foreground {
+    width: 100%;
+    height: 100%;
+}
+
+/* ----------------------------------------------------
+   About Section (Cleanly unaffected, fluid goes under)
+   ---------------------------------------------------- */
+.About {
+    position: relative;
+    z-index: 20;
+    background-color: var(--bg-color);
+    padding: 20px 24px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    isolation: isolate;
+}
+
+.AboutTitle {
+    font-size: clamp(40px, 9.5vw, 150px);
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.AboutTitle::selection {
+    background-color: rgb(89, 106, 255);
+    color: white;
+}
+
+.AboutDescription {
+    font-size: clamp(24px, 6.5vw, 120px);
+    line-height: 1.15;
+    margin-top: 16px;
+    margin-bottom: 40px;
+    padding-left: 0;
+    color: var(--about-description-color);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition: color 0.25s ease;
+}
+
+.AboutDescription::selection {
+    background-color: rgb(28, 253, 95);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.AboutSpan {
+    display: inline-block;
+    background-color: rgb(28, 253, 95);
+    color: #02220d;
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+}
+
+.AboutSpan::selection {
+    background-color: transparent;
+    color: inherit;
+}
+
+/* ----------------------------------------------------
+   Socials / Work Section (Unaffected)
+   ---------------------------------------------------- */
+.socials-section {
+    position: relative;
+    z-index: 20;
+    background-color: var(--bg-color);
+    padding: 10px 24px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    isolation: isolate;
+}
+
+.WorkTitle {
+    font-size: clamp(40px, 9.5vw, 150px);
+    line-height: 1.05;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.WorkDn {
+    font-size: clamp(26px, 6vw, 100px);
+    line-height: 1.15;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 0;
+    color: rgb(89, 106, 255);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.WorkDb {
+    font-size: clamp(26px, 6vw, 100px);
+    line-height: 1.15;
+    margin-top: 6px;
+    margin-bottom: 60px;
+    padding-left: 0;
+    color: rgb(255, 89, 144);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.flash-highlight {
+    animation: flashSection 0.3s ease;
+}
+
+@keyframes flashSection {
+    0% {
+        background-color: transparent;
+        box-shadow: 0 0 0 rgba(89, 106, 255, 0);
+    }
+    25% {
+        background-color: rgba(89, 106, 255, 0.18);
+        box-shadow: 0 0 0 12px rgba(89, 106, 255, 0.12);
+        border-radius: 12px;
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: 0 0 0 rgba(89, 106, 255, 0);
+    }
+}
+
+/* ----------------------------------------------------
+   Footer
+   ---------------------------------------------------- */
+footer {
+    position: relative;
+    z-index: 20;
+    background-color: rgb(15, 15, 15);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 18px 24px;
+    font-family: Inter, Arial, sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    isolation: isolate;
+}
+
+.Footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    min-width: 100px;
+}
+
+.discord-link {
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.FooterText {
+    margin: 0 auto;
+    text-align: center;
+    flex: 1;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.discord {
+    color: white;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 15px;
+    transition: opacity 0.2s ease;
+}
+
+.discord:hover {
+    opacity: 0.8;
+}
+
+.SocialIcon {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.SocialIcon:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+.SocialIcon:active {
+    transform: scale(0.9);
+}
+
+/* ----------------------------------------------------
+   Mobile Version Optimizations (< 768px)
+   ---------------------------------------------------- */
+@media (max-width: 768px) {
+    .topbar {
+        padding: 10px 14px;
+    }
+
+    .top-right {
+        gap: 12px;
+    }
+
+    .TRT {
+        font-size: 14px;
+    }
+
+    .theme-toggle-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .hero-liquid-wrapper {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .liquid-container {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .Content {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 60px 14px 20px;
+    }
+
+    .Title {
+        font-size: clamp(52px, 18vw, 120px);
+    }
+
+    .Description {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .video-stage {
+        height: 55vh;
+        min-height: 320px;
+        margin-bottom: 30px;
+    }
+
+    .video-window {
+        width: 88vw;
+        height: 52vw;
+        min-width: unset;
+        min-height: unset;
+        border-radius: 18px;
+    }
+
+    .About {
+        padding: 10px 16px 30px;
+    }
+
+    .socials-section {
+        padding: 10px 16px 40px;
+    }
+
+    .Footer {
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 6px 0;
+    }
+
+    .social-link {
+        min-width: auto;
+    }
+
+    .discord-link {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .discord {
+        text-align: center;
+    }
+}

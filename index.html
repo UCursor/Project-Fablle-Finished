@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fable Web Design & Development</title>
+    <link rel="icon" href="Images/Logo.png" />
+    <meta name="description" content="Project Fable creates modern websites through web design, development, and digital experiences." />
+    <meta property="og:title" content="Fable Web Design & Development" />
+    <meta property="og:description" content="Project Fable creates modern websites through web design, development, and digital experiences." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          const desc = Object.getOwnPropertyDescriptor(window, 'fetch') || Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+          if (desc && !desc.set) {
+            let activeFetch = window.fetch ? window.fetch.bind(window) : undefined;
+            Object.defineProperty(window, 'fetch', {
+              get: function() { return activeFetch; },
+              set: function(fn) { activeFetch = fn; },
+              configurable: true,
+              enumerable: true
+            });
+          }
+        } catch (e) {
+          // ignore if environment locks property definition
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
